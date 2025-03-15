@@ -15,3 +15,36 @@ code {
 .vh-95{
   height:95vh !important; 
 }
+
+.chat-window{
+  z-index:100;
+  height:100%;
+  overflow: hidden;
+}
+.chat-height{
+  height:calc(100% -20vh) !important;
+}
+
+.chat-message-left,.chat-mesage-right{
+  display:"flex";
+  flex-shrink:0;
+ 
+}
+.chat-message-left{
+  margin-right:auto;
+}
+
+.chat-mesage-right{
+  flex-direction: row-reverse;
+  margin-left: auto;
+
+}
+.styles_scrollable-div_prSCv {
+  max-height: calc(100%-2px) !important;
+  height:calc(100%-2px) !important;
+  overflow-y: auto;
+}
+chat-input{
+  position:sticky;
+  bottom:0;
+}

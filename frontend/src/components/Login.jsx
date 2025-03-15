@@ -1,7 +1,7 @@
 import React from "react";
 
-const Login= ({newUser,handleChange,logNewUser})=>{
-    return(
+const Login = ({newUser,handleChange,logNewUser})=>{
+   return(
         <div className="card w-100 text-center border-white">
         <div className="row">
           <div className="row-12">
@@ -12,13 +12,8 @@ const Login= ({newUser,handleChange,logNewUser})=>{
             <input type="text" name="username" value={newUser} className="form-control mb-3" placeholder="Username"
             autoComplete="off"
             onChange={handleChange} 
-            onKeyDown={(e) => e.code === "Enter" && logNewUser()} 
+            onKeyDown={(e) => (e.code === "Enter" ? logNewUser():null)} 
 
-        
-            
-
-             
-             
              />
              <button className=" btn btn-success w-100"
              onClick={logNewUser}
@@ -30,8 +25,6 @@ const Login= ({newUser,handleChange,logNewUser})=>{
         </div>
         </div>
         
-
-
     );
 
 }

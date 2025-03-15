@@ -1,50 +1,51 @@
-import React from 'react';
- 
-const Chat= ({user})=>{
+import React from 'react'; 
+import ChatHeader from "./ChatHeader";
+import ChatInput from "./ChatInput";
+import ChatContainer from './ChatContainer';
+//import ScrollableFeed  from "react-scrollable-feed"
+const Chat= ({user,message,sendMessage,setMessage,messages})=>{
     return(
-        <div className="card border-2 border-info w-100">
-        <div className="row vh-95">
-          <div className="d-flex flex-coloumn col-12 col-lg-12 col-xl-12">
-            {/*chat Header*/}
-            <div className="align-items-start py-2 px-2 w-100 border-info  border-bottom d-lg-block sticky-top bg-white">
-              <div className="d-flex align-items-center pd-1">
-                <div className="position-relative ">
-                  <img 
-                  src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                  className="rounded-circle mx-2 " 
-                  alt={user?.name || "User Avatar"} // ✅ Fixed alt
-                  width="40"
-                  height="40"/>
-                  
-
-                </div>
-                <div className="flex-grow-1">
-                <strong>Logged in as {user?.name || "Guest"}</strong> {/* ✅ Fixed rendering */}
-                </div>
-              </div>
-            
-          </div>
-          {/*Chat Header*/}
-          <div className="align-items-end border-info py-3 px-4 border-top d-lg-block">
-  <div className="w-100">
-    <input 
-      type="text" 
-      className="form-control mb-2 w-100" 
-      name="message" 
-      placeholder="Type your Message..."
-    />
-    <button className="btn btn-info w-100">Send</button> {/* ✅ Full-width button */}
+      <ChatContainer>
+        <ChatHeader user={user}/>
+          <div className="position-relative chat-height overflow-auto">
+            <div className="d-flex flex-column p-4">
+            {messages.map((message, index) =>
+  message.type === "User-Status" && user ? (
+    <div key={index} className="text-center">
+      <span className="badge bg-info">
+        {message.userId === user?.userId ? "You have joined!" : `${message.username} has joined!!`}
+      </span>
+    </div>
+  ) : <div key={index} classname={message.userId===user.userId ? "chat-message-right pb-4 ": "chat-message-left pb-4"}>
+    <div >
+      <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
+      className="rounded-circle mr-1"
+      alt={message.username}
+      title={message.username}
+      width="40"
+      height="40"
+      />
+      <div classname="text-muted small text-nowrap mt-2">
+        12:00 AM
+      </div>
+    </div>
+    <div classname="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+      <div classname="font-weight-bold mb-1 ">
+        {message.userId===user.userId? "You":message.username}
+      </div>
+      {message.message}
+    </div>
   </div>
-</div>
+)}
+
+
+            </div>
+          </div>
+        <ChatInput message={message} setMessage={setMessage}  sendMessage={sendMessage}/>
+      </ChatContainer>  
   
 
-        </div>
-
-
-        </div>
-        
-        
-        </div>
+       
     );
 }
 
